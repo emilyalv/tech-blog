@@ -7,6 +7,7 @@ router.post('/', withAuth, (req, res) => {
         title: req.body.title,
         contents: req.body.contents,
         user_id: req.session.user_id,
+        
     };
     Post.create(newPost).then(postData => {
         res.json(postData)
@@ -23,6 +24,16 @@ router.get('/', async (req,res) => {
         res.status(400).json(error);
     }
 });
+
+// //route for /api/posts to find posts by ID
+// router.get('/:id', async (req,res) => {    
+//     try {
+//         const postData = await Post.findOne({ where: { id: req.body.id }, include: Comment });
+//         res.status(200).json(postData);
+//     } catch (error) {
+//         res.status(400).json(error);
+//     }
+// });
 
 
 module.exports = router
