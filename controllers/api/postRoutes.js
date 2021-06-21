@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const withAuth = require('../../utils/auth');
 const { User, Post, Comment } = require('../../models');
+const { restore } = require('../../models/User');
 
+//create new post
 router.post('/', withAuth, (req, res) => {
     const newPost = {
         title: req.body.title,
@@ -15,25 +17,6 @@ router.post('/', withAuth, (req, res) => {
     .catch(err => console.log(err));    
 });
 
-//route for /api/posts to find all posts
-router.get('/', async (req,res) => {    
-    try {
-        const postData = await Post.findAll({include: Comment})
-        res.status(200).json(postData);
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
-
-// //route for /api/posts to find posts by ID
-// router.get('/:id', async (req,res) => {    
-//     try {
-//         const postData = await Post.findOne({ where: { id: req.body.id }, include: Comment });
-//         res.status(200).json(postData);
-//     } catch (error) {
-//         res.status(400).json(error);
-//     }
-// });
 
 
 module.exports = router

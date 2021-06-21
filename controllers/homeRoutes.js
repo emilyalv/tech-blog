@@ -5,7 +5,7 @@ const { Post, User, Comment } = require('../models');
 
 router.get('/', async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
+    // Get all posts and JOIN with user data
     const postData = await Post.findAll({
       include: [{model: Comment}],
     });
@@ -50,27 +50,34 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-// router.get('/post/:id', async (req, res) => {
-//   try {
-//     // Get a single post by ID and join with user data
-//     const postData = await Post.findByPk(req.params.id, {
-//       include: [
-//         {
-//           model: User,
-//           attributes: ['name'],
-//         },
-//       ],
-//     });
-//     const singlePost = postData.map((post) => post.get({ plain: true }));
 
-//     // Pass data and session flag into template
-//     res.render('post', { 
-//       singlePost, 
-//       logged_in: req.session.logged_in 
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+router.get('/posts/:id', async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: Post,
+          attributes: [
+            'id',
+            'title',
+            'contents',
+            'date_created',
+            'user_id',
+          ],
+          model: User,
+          attributes: [
+            'name'
+          ]
+        },
+      ],
+    });
+
+    const post = postData.get({ plain: true });
+    res.render('post', { post });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router

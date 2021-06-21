@@ -19,13 +19,18 @@
 
     </header>
     <header>
-              <!-- Conditionally render login or logout links -->
+      {{!-- <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light"> --}}
+        <nav>
+        <!--always render home-->
+        <a href="/" id="home">Home</a>  
+        <!-- Conditionally render login, profile and logout buttons -->
         {{#if logged_in}}
-        <a href="/profile"><button class="no-button" id="logout">Profile</button></a> |
-        <a href="#"><button class="no-button" id="logout">Logout</button></a>
+        <a href="/profile" id="profile">Profile</a> 
+        <a href="#" id="logout">Logout</a>
         {{else}}
-        <a href="/login"><button class="no-button" id="logout">Login</button></a>
+        <a href="/login" id="logout">Login</a>
         {{/if}}
+       
       </nav>
     </header>
     <main class="container container-fluid mt-5">

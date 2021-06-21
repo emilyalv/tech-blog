@@ -1,7 +1,7 @@
 const postFormHandler = async (event) => {
     event.preventDefault();
   
-    // Collect values from the login form
+    // Collect values from the new post form
     const title = document.querySelector('#post-title').value.trim();
     const contents = document.querySelector('#post-contents').value.trim();
   
