@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   try {
     // Get all posts and JOIN with user data
     const postData = await Post.findAll({
-      include: [{model: Comment}],
+      // include: [{model: Comment}],
     });
     const posts = postData.map((post) => post.get({ plain: true }));
 
@@ -50,7 +50,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-
+//get a single post and display on posts/id page 
 router.get('/posts/:id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
@@ -67,13 +67,23 @@ router.get('/posts/:id', async (req, res) => {
           model: User,
           attributes: [
             'name'
+          ],
+          model: Comment,
+          attributes: [
+            'contents',
+            'date_created',
+            'user_id'
           ]
         },
       ],
     });
 
     const post = postData.get({ plain: true });
-    res.render('post', { post });
+    console.log(post);
+    res.render('post', { 
+      post,
+      logged_in: req.session.logged_in 
+     });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

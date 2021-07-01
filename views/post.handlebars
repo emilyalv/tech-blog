@@ -1,21 +1,20 @@
 <!--post details-->
 <div class="row mb-4 post">
-  <div class="col-md-5">
+  <div class="col-md-12">
     <h2>
       {{post.title}}
     </h2>
     <p>
       {{post.contents}}
     </p>
-    {{!-- <p>Created by {{post.user.name}} on {{post.date_created}}</p> --}}
-    <p>Created on {{post.date_created}}</p>
+    <p class="small">Created by {{post.user.name}} on {{post.date_created}}</p>
 </div>
 
 <!--comment form-->
-<div>
+<div class="col-md-12">
     <form class="form comment-form">
     <div class="form-group">
-        <label for="comment-contents">Comment</label>
+        <label for="comment-contents">Comment</label><br>
         <textarea class="form-input" type="text" id="comment-body" name="comment-body" /></textarea>
     </div>
     <div class="form-group">
@@ -25,7 +24,7 @@
 </div>
 
 <!--diplay comments-->
-<div>
+<div class="col-md-12">
     {{#each comments as |comment| }}
     <p>
       {{comment.contents}}
@@ -34,4 +33,4 @@
     {{/each}}
 </div>
 
-    <script src="./js/post.js"></script>
+<script src="./js/post.js"></script>
