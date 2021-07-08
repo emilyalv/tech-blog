@@ -9,7 +9,7 @@
     </p>
     <p class="small">Created by {{post.user.name}} on {{post.date_created}}</p>
 </div>
-
+ {{#if logged_in}}
 <!--comment form-->
 <div class="col-md-12">
     <form class="form comment-form">
@@ -22,6 +22,7 @@
     </div>
     </form>
 </div>
+{{/if}}
 
 <!--diplay comments-->
 <div class="col-md-12">
@@ -33,4 +34,4 @@
     {{/each}}
 </div>
 
-<script src="./js/post.js"></script>
+<script src="/js/post.js"></script>
