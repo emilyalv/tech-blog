@@ -3,12 +3,13 @@ const commentFormHandler = async (event) => {
   
     // Collect values from the comment form
     const contents = document.querySelector('#comment-body').value.trim();
+    const postId = document.querySelector('#post-id').value;
   
     if (contents) {
       // Send a POST request to the API endpoint
       const response = await fetch('/api/comments', {
         method: 'POST',
-        body: JSON.stringify({ contents }),
+        body: JSON.stringify({ contents, postId }),
         headers: { 'Content-Type': 'application/json' },
       });
   

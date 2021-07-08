@@ -6,9 +6,7 @@ const { Post, User, Comment } = require('../models');
 router.get('/', async (req, res) => {
   try {
     // Get all posts and JOIN with user data
-    const postData = await Post.findAll({
-      // include: [{model: Comment}],
-    });
+    const postData = await Post.findAll({});
     const posts = postData.map((post) => post.get({ plain: true }));
 
     // Pass serialized data and session flag into template
@@ -54,32 +52,26 @@ router.get('/login', (req, res) => {
 router.get('/posts/:id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
+      attributes: ["id", "contents", "date_created", "user_id"],
       include: [
         {
-          model: Post,
-          attributes: [
-            'id',
-            'title',
-            'contents',
-            'date_created',
-            'user_id',
-          ],
           model: User,
           attributes: [
             'name'
           ],
-          model: Comment,
-          attributes: [
-            'contents',
-            'date_created',
-            'user_id'
-          ]
         },
+        // {
+        //   model: Comment,
+        //   attributes: [
+        //     'contents',
+        //     'date_created',
+        //     'user_id'
+        //   ]
+        // }
       ],
     });
 
     const post = postData.get({ plain: true });
-    console.log(post);
     res.render('post', { 
       post,
       logged_in: req.session.logged_in 

@@ -7,7 +7,7 @@ router.post('/', withAuth, (req, res) => {
     const newComment = {
         contents: req.body.contents,
         user_id: req.session.user_id,
-        post_id: req.body.post_id,
+        post_id: req.body.postId,
         
     };
     Comment.create(newComment).then(commentData => {

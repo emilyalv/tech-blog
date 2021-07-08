@@ -7,7 +7,7 @@
     <p>
       {{post.contents}}
     </p>
-    <p class="small">Created by {{post.user.name}} on {{post.date_created}}</p>
+    <p class="small">Created by {{post.user.name}} on {{post.date_created}}</p>    
 </div>
  {{#if logged_in}}
 <!--comment form-->
@@ -16,6 +16,7 @@
     <div class="form-group">
         <label for="comment-contents">Comment</label><br>
         <textarea class="form-input" type="text" id="comment-body" name="comment-body" /></textarea>
+        <input type="hidden" id="post-id" value="{{post.id}}"">
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Post Comment</button>
