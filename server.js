@@ -10,6 +10,10 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+}
+
 // Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({ });
 
